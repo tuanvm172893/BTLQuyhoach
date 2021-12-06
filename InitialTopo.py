@@ -44,7 +44,7 @@ def Global_Init_Topo(MAX,NumNode,DeBug):
                 count_Node+=1
     print(len(ListPosition))   
 
-    with open('Danh_sach_canh.txt', 'a', encoding='utf8') as f:
+    with open('Danh_sach_canh.txt', 'w', encoding='utf8') as f:
         for i in ListPosition:
             for j in ListPosition:
                 if int(j.name)> int(i.name):
