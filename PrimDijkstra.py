@@ -3,6 +3,18 @@ import copy
 import Node
 import sys
 
+                 
+def cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix):
+    gia = 0
+    for i in range(len(listNodeBackbone)):
+        for j in range(len(listNodeBackbone)):
+            i1 = listNodeBackbone[i].get_name() - 1
+            j1 = listNodeBackbone[j].get_name() - 1
+            if j1 != i1:
+                if FinalRoadMap[i1][j1]==1 and TrafficMatrix[i1][j1]>0:
+                        gia = gia + listNodeBackbone[i].caculate_distance(listNodeBackbone[j])*n[i1, j1]  
+    return gia/2         
+
 def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
 
     listNodeBackbone = []
@@ -29,11 +41,13 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
     # Dựng cây với Prim - Dijkstra BFS
     color = [0] * NumNode
     L = [math.inf] * NumNode
+    d = [0] * NumNode
     color[homeNode.get_name() - 1] = 1
-    L[homeNode.get_name() - 1] = 0
+    d[homeNode.get_name() - 1] = 0
     pre = [-1] * NumNode
     queue = [homeNode]
     while len(queue) > 0:
+        # print(len(queue))
         currentNode = queue[0]
         for q in queue:
             if L[q.get_name() - 1] < L[currentNode.get_name() - 1]:
@@ -44,14 +58,18 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
             if currentNode == neighborNode:
                 continue
             indexNeighborNode = neighborNode.get_name() - 1
+            distance = neighborNode.caculate_distance(currentNode)
+            new_L = anpha * d[indexCurrentNode] + distance
             if color[indexNeighborNode] == 0:
-                L[indexNeighborNode] = anpha * L[indexCurrentNode] + neighborNode.caculate_distance(currentNode)
+                L[indexNeighborNode] = new_L
+                d[indexNeighborNode] = d[indexCurrentNode] + distance
                 color[indexNeighborNode] = 1
                 pre[indexNeighborNode] = indexCurrentNode
                 queue.append(neighborNode)
             else:
-                if L[indexNeighborNode] > anpha * L[indexCurrentNode] + neighborNode.caculate_distance(currentNode):
-                    L[indexNeighborNode] = anpha * L[indexCurrentNode] + neighborNode.caculate_distance(currentNode)
+                if L[indexNeighborNode] > new_L:
+                    L[indexNeighborNode] = new_L
+                    d[indexNeighborNode] = d[indexCurrentNode] + distance
                     pre[indexNeighborNode] = indexCurrentNode
 
     RoadMatrix = [[-1] * NumNode for i in range(NumNode)]
@@ -60,7 +78,9 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         RoadMatrix[index][pre[index]] = 1
         RoadMatrix[pre[index]][index] = 1
 
-    Node.matplotList(listNodeBackbone, 1200, RoadMatrix)
+    Node.matplotList(listNodeBackbone, 1000, RoadMatrix)
+    
+    
     # Cập nhật lưu lượng
     for i in range(len(ListMentor)-1):
         _list1 = ListMentor[i]
@@ -75,7 +95,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                     TrafficMatrix[k][q] += TrafficMatrix[k1][q1]
                     TrafficMatrix[q][k] += TrafficMatrix[k1][q1]
     
-    print("cap nhat luu luong")
+    print("Cap nhat luu luong: ")
     for i in range(len(ListMentor)-1):
 
         for j in range(i+1, len(ListMentor)):
@@ -87,9 +107,12 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
 
     writeOutput1(listNodeBackbone, TrafficMatrix)
 
-    FinnalRoadMap = copy.deepcopy(RoadMatrix)
+    FinalRoadMap = copy.deepcopy(RoadMatrix)
     # Tính số đường sử dụng + Độ sử dụng
     color = [0] * NumNode
+    
+    n = {}
+            
     def DFS(start, hops, current, _list):
         if (len(_list) - 1 == hops):
             
@@ -102,17 +125,18 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
             if TrafficMatrix[s][e] == 0:
                 print("Hai nút không có lưu lượng")
                 return
-            n = math.ceil(TrafficMatrix[s][e]/C)
-            u = TrafficMatrix[s][e] / (n*C)
+            n[s, e] = math.ceil(TrafficMatrix[s][e]/C)
+            n[e, s] = n[s,e]
+            u = TrafficMatrix[s][e] / (n[s, e]*C)
 
             if hops == 1:
-                print("T({}, {}): {}, n = {}".format(s+1, e+1, TrafficMatrix[s][e], n))
+                print("T({}, {}): {}, n = {}".format(s+1, e+1, TrafficMatrix[s][e], n[s, e]))
                 return
 
             if u >= Umin :
                 print("U > Umin => Thêm liên kết trực tiếp")
-                FinnalRoadMap[s][e] = 1
-                FinnalRoadMap[e][s] = 1
+                FinalRoadMap[s][e] = 1
+                FinalRoadMap[e][s] = 1
 
             else:
                 print("U < Umin => Chuyển lưu lượng qua mạng")
@@ -132,7 +156,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                 print("Nút home: {}".format(iHomeNode+1))
                 print("T({}, {}): {}".format(s+1, iHomeNode+1, TrafficMatrix[s][iHomeNode]))
                 print("T({}, {}): {}".format(iHomeNode+1, e+1, TrafficMatrix[iHomeNode][e]))
-            print("T({}, {}): {}, n = {}, u = {}".format(s+1, e+1, TrafficMatrix[s][e], n, u))
+            print("T({}, {}): {}, n = {}, u = {}".format(s+1, e+1, TrafficMatrix[s][e], n[s, e], u))
 
             return
 
@@ -143,7 +167,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                 _list.append(next)
                 color[j] = 1
                 DFS(start, hops, next, _list)
-                _list.remove(next)
+                _list = _list[:-1]
                 color[j] = 0
 
     original_stdout = sys.stdout
@@ -151,16 +175,17 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         sys.stdout = f
         maxHop = len(listNodeBackbone) - 1
         for i in range(maxHop, 0, -1):
-            print()
             print("***********************")
             print("Xét {} hops: ".format(i))
             for start in listNodeBackbone:
                 color = [0] * NumNode
                 DFS(start, i, start, [start])
+        print("----------------------------------------------------------------------")        
+        print("Gia cua mang Backbone: ", cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix))        
         sys.stdout = original_stdout
-
-    Node.matplotList(listNodeBackbone, 1200, FinnalRoadMap)
-    return 0
+   
+    Node.matplotList(listNodeBackbone, 1000, FinalRoadMap)
+    return cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix)
 
 
 def writeOutput1(listNodeBackbone, TrafficMatrix):

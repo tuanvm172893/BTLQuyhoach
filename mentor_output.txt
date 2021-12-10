@@ -10104,91 +10104,77 @@ Nút 	 | 	 Trọng số
 100 		 | 		 9
 
 Nút backbone: 7
-Các nút truy nhập của nút backbone: [12, 14, 92, 16, 76, 81, 75, 4, 96, 69]
+Các nút truy nhập của nút backbone: [71, 18, 36, 57, 89, 51, 19, 96, 73, 61, 95, 31, 50, 56, 94, 5, 65, 72, 40, 90, 85, 52, 88, 84, 68, 75, 24, 10, 93, 43, 22, 63, 33, 97, 49, 77, 2, 54, 91, 4, 100, 34, 53, 69, 59, 11, 45, 55, 12, 41, 37, 86, 32, 16, 29, 74, 39, 81, 64, 70, 87, 67, 82, 83, 58, 66, 80, 25, 46, 98, 9, 76, 44, 92, 38, 47, 99, 28, 27, 15, 26]
 
 Nút backbone: 13
-Các nút truy nhập của nút backbone: [44, 71, 34, 85, 18, 28, 93, 3, 65, 40]
-
-Nút backbone: 20
-Các nút truy nhập của nút backbone: [70, 61, 84, 54, 1, 99, 66, 36, 87, 88]
-
-Nút backbone: 48
-Các nút truy nhập của nút backbone: [5, 80, 50, 45, 56, 17, 59, 39, 2, 43]
-
-Nút backbone: 35
-Các nút truy nhập của nút backbone: [19, 6, 72, 21, 52, 57, 67, 11, 74, 98]
-
-Nút backbone: 55
-Các nút truy nhập của nút backbone: [79, 41, 73, 89, 31, 46, 49, 68, 24, 9]
-
-Nút backbone: 100
-Các nút truy nhập của nút backbone: [32, 10, 47, 62, 97, 95, 78, 83, 90, 22]
-
-Nút backbone: 94
-Các nút truy nhập của nút backbone: [82, 53, 51, 15, 33, 91, 58, 38, 27, 29]
-
-Nút backbone: 86
-Các nút truy nhập của nút backbone: [77, 63, 23, 60, 64, 30]
-
-Nút backbone: 8
-Các nút truy nhập của nút backbone: [42, 26, 37]
-
-Nút backbone: 25
 Các nút truy nhập của nút backbone: []
 
+Nút backbone: 20
+Các nút truy nhập của nút backbone: [6, 21, 79, 17]
+
+Nút backbone: 48
+Các nút truy nhập của nút backbone: [78, 60, 42, 62, 35, 8, 14, 30, 1, 3, 23]
+
 Lưu lượng thực tế giữa các nút backbone:
-Luu luong(7, 13): 31
-Luu luong(7, 20): 5
-Luu luong(7, 48): 1
-Luu luong(7, 35): 7
-Luu luong(7, 55): 11
-Luu luong(7, 100): 15
-Luu luong(7, 94): 5
-Luu luong(7, 86): 1
-Luu luong(7, 8): 0
-Luu luong(7, 25): 0
-Luu luong(13, 20): 2
-Luu luong(13, 48): 2
-Luu luong(13, 35): 4
-Luu luong(13, 55): 5
-Luu luong(13, 100): 4
-Luu luong(13, 94): 6
-Luu luong(13, 86): 1
-Luu luong(13, 8): 2
-Luu luong(13, 25): 0
-Luu luong(20, 48): 28
-Luu luong(20, 35): 13
-Luu luong(20, 55): 8
-Luu luong(20, 100): 5
-Luu luong(20, 94): 5
-Luu luong(20, 86): 2
-Luu luong(20, 8): 0
-Luu luong(20, 25): 0
-Luu luong(48, 35): 4
-Luu luong(48, 55): 1
-Luu luong(48, 100): 14
-Luu luong(48, 94): 2
-Luu luong(48, 86): 2
-Luu luong(48, 8): 2
-Luu luong(48, 25): 0
-Luu luong(35, 55): 17
-Luu luong(35, 100): 5
-Luu luong(35, 94): 1
-Luu luong(35, 86): 3
-Luu luong(35, 8): 0
-Luu luong(35, 25): 0
-Luu luong(55, 100): 0
-Luu luong(55, 94): 5
-Luu luong(55, 86): 0
-Luu luong(55, 8): 0
-Luu luong(55, 25): 0
-Luu luong(100, 94): 2
-Luu luong(100, 86): 2
-Luu luong(100, 8): 1
-Luu luong(100, 25): 0
-Luu luong(94, 86): 2
-Luu luong(94, 8): 1
-Luu luong(94, 25): 0
-Luu luong(86, 8): 4
-Luu luong(86, 25): 0
-Luu luong(8, 25): 0
+Luu luong(7, 13): 20
+Luu luong(7, 20): 22
+Luu luong(7, 48): 53
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 31
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 44
+Luu luong(7, 48): 106
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 36
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 66
+Luu luong(7, 48): 159
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 41
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 88
+Luu luong(7, 48): 212
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 46
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 110
+Luu luong(7, 48): 265
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 51
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 132
+Luu luong(7, 48): 318
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 56
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 154
+Luu luong(7, 48): 371
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 61
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 176
+Luu luong(7, 48): 424
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 66
+Lưu lượng thực tế giữa các nút backbone:
+Luu luong(7, 13): 20
+Luu luong(7, 20): 198
+Luu luong(7, 48): 477
+Luu luong(13, 20): 0
+Luu luong(13, 48): 0
+Luu luong(20, 48): 71
