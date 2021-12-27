@@ -196,7 +196,34 @@ def matplotList(_list, MAX, RoadMatrix = None):
     plt.axis([-plt_margin, MAX + plt_margin, -plt_margin, MAX + plt_margin])
     plt.show()
 
+def matplotList1(_list, MAX, RoadMatrix, n, TrafficMatrix):
+    xpos = []
+    ypos = []
+    npos = []
+    for i in _list:
+        xpos.append(i.get_position_x())
+        ypos.append(i.get_position_y())
+        npos.append(i.get_name())
 
+    for i in range(0, len(_list)):
+        plt.text(xpos[i], ypos[i], str(_list[i].get_name()), color='black', size=10, rotation=0.,
+                 ha="center", va="center",
+                 bbox=dict(facecolor=(1., 0.8, 0.8), edgecolor='none', boxstyle='round')
+                 )
+
+    plt.plot(xpos[0], ypos[0], 'ro', markersize=10, markerfacecolor='r',
+                 markeredgewidth=1.5, markeredgecolor=(0, 0, 0, 1))
+    if RoadMatrix != None:
+        for i in range(len(npos)-1):
+            for j in range(i+1, len(npos)):
+                if RoadMatrix[npos[i]-1][npos[j]-1] == 1:
+                    plt.plot([xpos[i], xpos[j]], [ypos[i], ypos[j]])
+                if RoadMatrix[npos[i]-1][npos[j]-1] == 1 and TrafficMatrix[npos[i]-1][npos[j]-1]>0:
+                    plt.text(int((xpos[i]+ xpos[j])/2), int((ypos[i]+ ypos[j])/2), "x" + str(n[npos[i]-1, npos[j]-1]))
+    plt_margin = MAX * 0.05
+    plt.axis([-plt_margin, MAX + plt_margin, -plt_margin, MAX + plt_margin])
+    plt.show()
+    
 def matplotconnectpoints(x, y, n1, n2):
     p1 = n1
     p2 = n2

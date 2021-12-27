@@ -14,7 +14,7 @@ if __name__ == '__main__':
     w = 2  # Trọng số lưu lượng chuẩn hóa dùng để xét nút backbone của thuật toán MENTOR
     anpha = 0.2
     Umin = 0.75
-    list_anpha = [x / 10.0 for x in range(1, 10, 1)]
+    list_anpha = [x / 10.0 for x in range(0, 10, 1)]
     list_giaBackBone = []
     InitialTopo = InitialTopo.Global_Init_Topo(MAX,NumNode,False)
     ListPosition = InitialTopo["ListPosition"]

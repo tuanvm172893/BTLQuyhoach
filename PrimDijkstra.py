@@ -55,7 +55,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         queue.remove(currentNode)
         indexCurrentNode = currentNode.get_name() - 1
         for neighborNode in listNodeBackbone:
-            if currentNode == neighborNode:
+            if currentNode == neighborNode or neighborNode==homeNode:
                 continue
             indexNeighborNode = neighborNode.get_name() - 1
             distance = neighborNode.caculate_distance(currentNode)
@@ -67,7 +67,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                 pre[indexNeighborNode] = indexCurrentNode
                 queue.append(neighborNode)
             else:
-                if L[indexNeighborNode] > new_L:
+                if L[indexNeighborNode] > new_L and indexNeighborNode!=pre[indexCurrentNode]:
                     L[indexNeighborNode] = new_L
                     d[indexNeighborNode] = d[indexCurrentNode] + distance
                     pre[indexNeighborNode] = indexCurrentNode
@@ -88,9 +88,9 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         for j in range(i+1, len(ListMentor)):
             _list2 = ListMentor[j]
             q = _list2[0].get_name() - 1
-            for i1 in range(1, len(_list1)):
+            for i1 in range(0, len(_list1)):
                 k1 = _list1[i1].get_name() - 1
-                for i2 in range(1, len(_list2)):
+                for i2 in range(0, len(_list2)):
                     q1 = _list2[i2].get_name() - 1
                     TrafficMatrix[k][q] += TrafficMatrix[k1][q1]
                     TrafficMatrix[q][k] += TrafficMatrix[k1][q1]
@@ -184,7 +184,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         print("Gia cua mang Backbone: ", cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix))        
         sys.stdout = original_stdout
    
-    Node.matplotList(listNodeBackbone, 1000, FinalRoadMap)
+    Node.matplotList1(listNodeBackbone, 1000, FinalRoadMap, n, TrafficMatrix)
     return cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix)
 
 
