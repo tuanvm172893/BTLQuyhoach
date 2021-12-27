@@ -22,14 +22,16 @@ if __name__ == '__main__':
     # ListPosition = InitialTopo.Global_Init_Topo_Fix_Position(MAX,NumNode,False)
     # False/ True: Nếu chọn True, toàn bộ các bước trong tạo topology mạng sẽ được giám sát và hiển thị
 
-    ListMentor = MENTOR.MenTor(ListPosition,TrafficMatrix,MAX,C,w,RadiusRatio,0,False)
+    ListMentor = MENTOR.MenTor(ListPosition,TrafficMatrix,MAX,C,w,RadiusRatio,10,False)
     # 0: Là số giới hạn nút đầu cuối của thuật toán MENTOR.
     # Khi một nút Backbone tìm thấy số lượng nút đầu cuối đạt của một mạng truy nhập tới giới hạn. Nó ngừng việc quét tìm nút đầu cuối. Nếu cài đặt giá trị này bằng 0 thì xem như không có giới hạn số lượng nút đầu cuối.
     # False/ True: Bật tắt giám sát thuật toán
+    # PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin)
     
+    #Hàm bieu dien moi quan he giua anpha va gia cua mang backbone
     for apha in list_anpha:
         TrafficMatrix1 = copy.deepcopy(TrafficMatrix)
         ListMentor1 = copy.deepcopy(ListMentor)
-        list_giaBackBone.append(PrimDijkstra(NumNode, TrafficMatrix1, ListMentor, C, apha, Umin))
+        list_giaBackBone.append(PrimDijkstra(NumNode, TrafficMatrix1, ListMentor1, C, apha, Umin))
     plt.plot(list_anpha, list_giaBackBone)
     plt.show()

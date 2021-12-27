@@ -55,7 +55,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         queue.remove(currentNode)
         indexCurrentNode = currentNode.get_name() - 1
         for neighborNode in listNodeBackbone:
-            if currentNode == neighborNode or neighborNode== homeNode:
+            if currentNode == neighborNode or neighborNode == homeNode:
                 continue
             indexNeighborNode = neighborNode.get_name() - 1
             distance = neighborNode.caculate_distance(currentNode)
