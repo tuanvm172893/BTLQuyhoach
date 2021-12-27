@@ -55,7 +55,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
         queue.remove(currentNode)
         indexCurrentNode = currentNode.get_name() - 1
         for neighborNode in listNodeBackbone:
-            if currentNode == neighborNode or neighborNode==homeNode:
+            if currentNode == neighborNode or neighborNode== homeNode:
                 continue
             indexNeighborNode = neighborNode.get_name() - 1
             distance = neighborNode.caculate_distance(currentNode)
@@ -67,7 +67,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                 pre[indexNeighborNode] = indexCurrentNode
                 queue.append(neighborNode)
             else:
-                if L[indexNeighborNode] > new_L and indexNeighborNode!=pre[indexCurrentNode]:
+                if L[indexNeighborNode] > new_L and indexNeighborNode!=pre[indexCurrentNode] and indexCurrentNode!=pre[indexNeighborNode]:
                     L[indexNeighborNode] = new_L
                     d[indexNeighborNode] = d[indexCurrentNode] + distance
                     pre[indexNeighborNode] = indexCurrentNode
@@ -75,8 +75,9 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
     RoadMatrix = [[-1] * NumNode for i in range(NumNode)]
     for node in listNodeBackbone:
         index = node.get_name() - 1
-        RoadMatrix[index][pre[index]] = 1
-        RoadMatrix[pre[index]][index] = 1
+        if pre[index] != -1:
+            RoadMatrix[index][pre[index]] = 1
+            RoadMatrix[pre[index]][index] = 1
 
     Node.matplotList(listNodeBackbone, 1000, RoadMatrix)
     
