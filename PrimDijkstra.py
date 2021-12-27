@@ -114,25 +114,25 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
     
     n = {}
             
-    def DFS(start, hops, current, _list):
+    def DFS(start, hops, current, _list, n):
         if (len(_list) - 1 == hops):
             
             s = _list[0].get_name() - 1
             e = _list[hops].get_name() - 1
             if (s > e):
-                return
+                return n
             print("--------------------------------------------------------")
             print("Đường đi: ", [i.get_name() for i in _list])
             if TrafficMatrix[s][e] == 0:
                 print("Hai nút không có lưu lượng")
-                return
+                return n
             n[s, e] = math.ceil(TrafficMatrix[s][e]/C)
             n[e, s] = n[s,e]
             u = TrafficMatrix[s][e] / (n[s, e]*C)
 
             if hops == 1:
                 print("T({}, {}): {}, n = {}".format(s+1, e+1, TrafficMatrix[s][e], n[s, e]))
-                return
+                return n
 
             if u >= Umin :
                 print("U > Umin => Thêm liên kết trực tiếp")
@@ -159,7 +159,6 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
                 print("T({}, {}): {}".format(iHomeNode+1, e+1, TrafficMatrix[iHomeNode][e]))
             print("T({}, {}): {}, n = {}, u = {}".format(s+1, e+1, TrafficMatrix[s][e], n[s, e], u))
 
-            return
 
         i = current.get_name() - 1
         for next in listNodeBackbone:
@@ -167,9 +166,10 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
             if (RoadMatrix[i][j] == 1) and (next not in _list):
                 _list.append(next)
                 color[j] = 1
-                DFS(start, hops, next, _list)
+                DFS(start, hops, next, _list, n)
                 _list = _list[:-1]
                 color[j] = 0
+        return n        
 
     original_stdout = sys.stdout
     with open('mentor_output_2.txt', 'w', encoding='utf8') as f:
@@ -180,7 +180,7 @@ def PrimDijkstra(NumNode, TrafficMatrix, ListMentor, C, anpha, Umin):
             print("Xét {} hops: ".format(i))
             for start in listNodeBackbone:
                 color = [0] * NumNode
-                DFS(start, i, start, [start])
+                DFS(start, i, start, [start], n)
         print("----------------------------------------------------------------------")        
         print("Gia cua mang Backbone: ", cal_GiaBackbone(n, FinalRoadMap, listNodeBackbone, TrafficMatrix))        
         sys.stdout = original_stdout
